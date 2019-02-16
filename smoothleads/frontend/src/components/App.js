@@ -1,24 +1,26 @@
 import React, { Component, Fragment } from 'react';
-import ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
 import Header from './layout/Header';
 import Dashboard from './leads/Dashboard';
-
-import { Provider } from 'react-redux';
-import store from '../store';
+import Alerts from './layout/Alerts';
 
 class App extends Component {
     render() {
+        const { alerts } = this.props;
         return (
-            <Provider store={store}>
-                <Fragment>
-                    <Header />
-                    <div className="container">
-                        <Dashboard />
-                    </div>
-                </Fragment>
-            </Provider>
+            <Fragment>
+                <Header />
+                <div className="container">
+                    <Alerts alerts={alerts} />
+                    <Dashboard />
+                </div>
+            </Fragment>
         )
     }
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const mapStateToProps = state => ({
+    alerts: state.alerts.alerts
+});
+
+export default connect(mapStateToProps)(App);

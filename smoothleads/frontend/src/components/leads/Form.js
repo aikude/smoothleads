@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addLead } from '../../actions/leads';
+import { clearAlerts } from '../../actions/alerts';
 
 export class Form extends Component {
   state = {
@@ -18,6 +19,8 @@ export class Form extends Component {
 
   onSubmit = e => {
     e.preventDefault();
+    this.props.clearAlerts();
+
     const { name, email, note } = this.state;
     const lead = { name, email, note };
     this.props.addLead(lead);
@@ -30,7 +33,7 @@ export class Form extends Component {
         <h2>Add Lead</h2>
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
-            <label htmlFor="name">Email address</label>
+            <label htmlFor="name">Full Name</label>
             <input type="text" className="form-control" name="name" id="name" 
               placeholder="Enter name" onChange={this.onChange} value={name} />
           </div>
@@ -51,4 +54,4 @@ export class Form extends Component {
   }
 }
 
-export default connect(null, { addLead })(Form);
+export default connect(null, { clearAlerts, addLead })(Form);
