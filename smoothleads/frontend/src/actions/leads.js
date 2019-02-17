@@ -2,9 +2,10 @@ import axios from 'axios';
 import { GET_LEADS, DELETE_LEAD, ADD_LEAD, CREATE_ALERTS } from './types';
 import { SERVER_URL } from '../constants';
 import { apiErrorToAlerts } from '../helpers';
+import { getTokenConfig } from '../actions/auth';
 
-export const getLeads = () => dispatch => {
-    axios.get(SERVER_URL)
+export const getLeads = () => (dispatch, getState) => {
+    axios.get(SERVER_URL, getTokenConfig(getState))
     .then(response => {
         dispatch({ type: GET_LEADS, payload: response.data });
     })
@@ -14,8 +15,8 @@ export const getLeads = () => dispatch => {
     });
 }
 
-export const deleteLead = (id) => dispatch => {
-    axios.delete(`${SERVER_URL}${id}/`)
+export const deleteLead = (id) => (dispatch, getState) => {
+    axios.delete(`${SERVER_URL}${id}/`, getTokenConfig(getState))
     .then(response => {
         //dispatch(createAlerts([{id: 'lead-delete-success', msg: 'Lead Deleted!', className:'alert alert-success'}]));
         dispatch({ type: CREATE_ALERTS, payload: [{id: 'lead-delete-success', msg: 'Lead Deleted!', className:'alert alert-success'}] });
@@ -24,8 +25,8 @@ export const deleteLead = (id) => dispatch => {
     .catch(error => { console.log(error)});
 }
 
-export const addLead = (lead) => dispatch => {
-    axios.post(SERVER_URL, lead)
+export const addLead = (lead) => (dispatch, getState) => {
+    axios.post(SERVER_URL, lead, getTokenConfig(getState))
     .then(response => {
         dispatch({ type: CREATE_ALERTS, payload: [{id: 'lead-add-success', msg: 'New Lead Added!', className:'alert alert-success'}] });
         dispatch({ type: ADD_LEAD, payload: response.data });

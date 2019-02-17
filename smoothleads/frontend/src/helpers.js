@@ -1,6 +1,6 @@
 
 export const deslugify = (slug) => {
-    return slug.replace("-", "");
+    return slug.split("-").join(" ").split("_").join(" ");
 }
 
 export const ucfirst = (str) => {

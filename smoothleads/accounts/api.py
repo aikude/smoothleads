@@ -5,7 +5,6 @@ from .serializers import UserSerializer, RegisterSerializer, LoginSerializer
 
 #Register API
 class RegisterAPI(generics.GenericAPIView):
-    # pylint: disable=no-member
     serializer_class = RegisterSerializer
 
     def post(self, request, *args, **kwargs):
@@ -20,7 +19,6 @@ class RegisterAPI(generics.GenericAPIView):
 
 # Login API
 class LoginAPI(generics.GenericAPIView):
-    # pylint: disable=no-member
     serializer_class = LoginSerializer
 
     def post(self, request, *args, **kwargs):
