@@ -1,8 +1,8 @@
 import React from 'react'
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 
+// A Route wrapper that adds authentication checks
 const PrivateRoute = ({ component: Component, auth, ...rest }) => {
     //console.log('PrivDash', auth);
     return <Route {...rest} 

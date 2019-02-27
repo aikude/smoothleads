@@ -1,3 +1,4 @@
+/* Lead creation form */
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -15,8 +16,10 @@ export class Form extends Component {
     addLead: PropTypes.func.isRequired
   };
   
+  // Set the respective state property for any updated field
   onChange = e => this.setState({ [e.target.name]: e.target.value });
 
+  // Handle form submission
   onSubmit = e => {
     e.preventDefault();
     this.props.clearAlerts();

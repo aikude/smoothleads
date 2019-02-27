@@ -16,8 +16,10 @@ export class Login extends Component {
         isAuthenticated: PropTypes.bool
     }
 
+    // Set the respective state property for any updated field
     onChange = e => this.setState({ [e.target.name]: e.target.value });
 
+    // Handle form submission
     onSubmit = e => {
         e.preventDefault();
         this.props.clearAlerts();
@@ -58,7 +60,7 @@ export class Login extends Component {
 }
 
 const mapStateToProps = state => ({
-    isAuthenticated: state.auth.isAuthenticated // Can use "auth: state.auth" if we'll need more state props in Login form
+    isAuthenticated: state.auth.isAuthenticated // We could use "auth: state.auth" instead, if we'll need more state props in Login form
 });
 
 export default connect(mapStateToProps, { loginUser, clearAlerts })(Login);
